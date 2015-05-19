@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import java.util.HashMap;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +27,7 @@ import org.json.JSONObject;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
+import android.widget.SimpleAdapter;
 
 
 //show friend list
@@ -47,10 +49,34 @@ public class HomePage extends ListActivity {
 
     private EditText targetEmail;
 
+
+
     //add funtion of addFriend Button
     public void addFriend(View view){
         new AddFriend().execute();
     }
+
+    String[] itemname ={
+            "aaaa",
+            "BBBBB",
+            "cccc",
+            "ddd",
+            "EEE",
+            "ffff",
+            "GGGGG",
+            "H"
+    };
+
+    Integer[] imgid={
+            R.drawable.contact_icon,
+            R.drawable.contact_icon,
+            R.drawable.contact_icon,
+            R.drawable.contact_icon,
+            R.drawable.contact_icon,
+            R.drawable.contact_icon,
+            R.drawable.contact_icon,
+            R.drawable.contact_icon,
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +88,23 @@ public class HomePage extends ListActivity {
         Intent intent = getIntent();
         username  = intent.getStringExtra("username");
 
+//        // create the grid item mapping
+//        String[] from = new String[] {"icon", "Alias", "Description"};
+//        int[] to = new int[] { R.id.icon, R.id.firstLine, R.id.secondLine};
+//        List<HashMap<String, String>> fillMaps = new ArrayList<HashMap<String, String>>();
+//        for(int i = 0; i < 10; i++){
+//            HashMap<String, String> map = new HashMap<String, String>();
+//            map.put("icon", Integer.toString(R.drawable.contact_icon));
+//            map.put("Alias", "Unknown");
+//            map.put("Description", "#$%^&@163.com");
+//            fillMaps.add(map);
+//        }
+//        //SimpleAdapter adapter = new SimpleAdapter(this, fillMaps, R.layout.grid_item, from, to);
+//        CustomListAdapter adapter=new CustomListAdapter(this, itemname, itemname, imgid);
+//        lv = getListView();
+//        lv.setAdapter(adapter);
+
         lv = getListView();
-
-
         new LoadALlFriends().execute();
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -73,7 +113,7 @@ public class HomePage extends ListActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 // getting values from selected ListItem
-                String username = ((TextView) view).getText().toString();
+                String username = ((TextView) view.findViewById(R.id.secondLine)).getText().toString();
 
                 // Starting new intent
                 Intent in = new Intent(getApplicationContext(),
@@ -85,6 +125,7 @@ public class HomePage extends ListActivity {
                 startActivity(in);
             }
         });
+
     }
 
     @Override
@@ -174,9 +215,12 @@ public class HomePage extends ListActivity {
             runOnUiThread(new Runnable() {
                 public void run() {
                     ArrayAdapter<String> codeLearnArrayAdapter =
-                            new ArrayAdapter<String>(HomePage.this, android.R.layout.simple_list_item_1, following);
+                            new ArrayAdapter<String>(HomePage.this, R.layout.grid_item, R.id.secondLine, following);
+                    String[] followingArr = new String[following.size()];
+                    CustomListAdapter customAdapter=new CustomListAdapter(HomePage.this, itemname, following.toArray(followingArr), imgid);
 
-                    lv.setAdapter(codeLearnArrayAdapter);
+                    //lv.setAdapter(codeLearnArrayAdapter);
+                    lv.setAdapter(customAdapter);
 //                    /**
 //                     * Updating parsed JSON data into ListView
 //                     * */
