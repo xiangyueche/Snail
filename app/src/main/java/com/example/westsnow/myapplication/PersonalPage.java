@@ -1,17 +1,20 @@
 package com.example.westsnow.myapplication;
 
+import com.example.westsnow.util.CurLocaTracker;
+
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
+
+import com.google.android.gms.maps.*;
 
 
-public class PersonalPage extends ActionBarActivity {
+public class PersonalPage extends CurLocaTracker {
 
     private String username;
+
 
     public void homepage(View view){
         Intent in = new Intent(getApplicationContext(),
@@ -38,6 +41,12 @@ public class PersonalPage extends ActionBarActivity {
 
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
+
+        MapFragment mapFragment = (MapFragment) getFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+        m_map = mapFragment.getMap();
+        buildGoogleApiClient();
     }
 
     @Override
@@ -61,4 +70,5 @@ public class PersonalPage extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
