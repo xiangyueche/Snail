@@ -15,6 +15,17 @@
         <requestFocus />
     </EditText>
 
+    <ImageView
+        android:id="@+id/open_image_from_disk_icon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="TODO"
+        android:layout_gravity="center"
+        android:src="@drawable/folder"
+        android:onClick="loadImagefromGallery" />
 
     <Button
         android:id="@+id/RegisterButton"

@@ -15,13 +15,13 @@ public class TestMaps extends CurLocaTracker{
     @Override
     protected void onCreate(Bundle savedInstanceState) { // when load main app, trigger onCreate
         super.onCreate(savedInstanceState);
-        setContentView(com.example.westsnow.myapplication.R.layout.activity_test_maps);
-
-        MapFragment mapFragment = (MapFragment) getFragmentManager()
-                .findFragmentById(com.example.westsnow.myapplication.R.id.map);
-        mapFragment.getMapAsync(this);
-        m_map = mapFragment.getMap();
-        buildGoogleApiClient();
+//        setContentView(com.example.westsnow.myapplication.R.layout.activity_test_maps);
+//
+//        MapFragment mapFragment = (MapFragment) getFragmentManager()
+//                .findFragmentById(com.example.westsnow.myapplication.R.id.map);
+//        mapFragment.getMapAsync(this);
+//        m_map = mapFragment.getMap();
+//        buildGoogleApiClient();
 
     }
 

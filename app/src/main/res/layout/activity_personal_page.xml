@@ -20,6 +20,7 @@
         android:layout_height="wrap_content"
         android:text="go to friend list"
         android:onClick="homepage" />
+
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/map"
         android:layout_width="match_parent"
