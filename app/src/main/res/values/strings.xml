@@ -10,5 +10,7 @@
     <string name="homepage_header">Friends List</string>
     <string name="title_activity_personal_page">PersonalPage</string>
     <string name="title_activity_send_moment">SendMoment</string>
-
+    <string name="Text">Text</string>
+    <string name="Photo">Photo</string>
+    <string name="Cancel">Cancel</string>
 </resources>

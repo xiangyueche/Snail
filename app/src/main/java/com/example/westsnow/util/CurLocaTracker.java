@@ -76,7 +76,7 @@ public class CurLocaTracker extends ActionBarActivity implements OnMapReadyCallb
 
         if(m_LastLocation == null) {
             System.out.println("Null!!!!");
-            throw new NullPointerException();// Todo: change to SnailExcpetion()
+            //throw new NullPointerException();// Todo: change to SnailExcpetion()
         }
         else{
             System.out.println(m_LastLocation.getLatitude() + "," + m_LastLocation.getLongitude());

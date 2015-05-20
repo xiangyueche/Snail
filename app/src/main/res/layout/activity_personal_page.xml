@@ -1,54 +1,76 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:id="@+id/content_frame">
 
-    <Button
-        android:id="@+id/sendMoment"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/UpLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="send moment"
-        android:onClick="sendMoment" />
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/HomePage"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="go to friend list"
-        android:onClick="homepage" />
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/Location"
+            android:layout_width="471dp"
+            android:layout_height="197dp"
+            android:orientation="vertical"
+            android:layout_alignTop="@+id/enterLocation"
+            android:layout_alignLeft="@+id/imageView1"
+            android:layout_alignStart="@+id/imageView1">
 
+            <EditText
+                android:id="@+id/start"
+                style="@style/Base.Widget.AppCompat.EditText"
+                android:hint="start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="45dp"
+                android:layout_below="@+id/HomePage"
+                android:ems="10"/>
+
+            <EditText
+                android:id="@+id/des"
+                style="@style/Base.Widget.AppCompat.EditText"
+                android:hint="destination"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginLeft="45dp"
+                android:layout_below="@+id/start"
+                android:ems="10"/>
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/enterLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:layout_marginLeft="30dp"
+            android:src="@drawable/forward"
+            android:background="@android:color/transparent"
+            android:onClick="GetRouteValue"/>
+
+    </LinearLayout>
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/map"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="com.google.android.gms.maps.MapFragment"/>
-
-    <EditText
-        android:id="@+id/start"
-        android:hint="start"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
-        android:ems="10" />
-
-    <EditText
-        android:id="@+id/des"
-        android:hint="destination"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
-        android:ems="10" />
-
-    <ImageView
-        android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/googlemap" />
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:layout_below="@+id/UpLocation"/>
 
+    <ImageButton
+        android:id="@+id/sendButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/addred"
+        android:layout_margin="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/transparent"
+        android:onClick="PopSendMenu"/>
 
-
-</LinearLayout>
+</RelativeLayout>

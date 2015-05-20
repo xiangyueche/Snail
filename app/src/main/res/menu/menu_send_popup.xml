@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/sendText"
+        android:title="@string/Text"/>
+
+    <item android:id="@+id/sendPhoto"
+        android:title="@string/Photo"/>
+
+    <item android:id="@+id/sendCancel"
+        android:title="@string/Cancel"/>
+
+</menu>

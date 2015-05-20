@@ -14,14 +14,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.widget.LinearLayout;
 import android.net.Uri;
 
 import android.provider.MediaStore;
 import android.database.Cursor;
 import android.widget.ImageView;
 import android.graphics.BitmapFactory;
+
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -61,13 +62,13 @@ public class SendMoment extends ActionBarActivity {
         username = intent.getStringExtra("username");
     }
 
-   public void loadImagefromGallery(View view) {
+    public void loadImagefromGallery(View view) {
         // Create intent to Open Image applications like Gallery, Google Photos
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         // Start the Intent
         startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
-   }
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -91,15 +92,15 @@ public class SendMoment extends ActionBarActivity {
                 ImageView imgView = (ImageView) findViewById(R.id.open_image_from_disk_icon);
                 // Set the Image in ImageView after decoding the String
                 imgView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
-                scaleImage();
-                } else {
+                //scaleImage();
+            } else {
                 Toast.makeText(this, "You haven't picked Image", Toast.LENGTH_LONG).show();
-                }
-            } catch (Exception e) {
-            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
             }
-
+        } catch (Exception e) {
+            Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
         }
+
+    }
     private void scaleImage()
     {
         // Get the ImageView and its bitmap
@@ -142,9 +143,11 @@ public class SendMoment extends ActionBarActivity {
 
         // Apply the scaled bitmap
         view.setImageDrawable(result);
+        Log.i("Test", "Apply the scaled bitmap");
 
         // Now change ImageView's dimensions to match the scaled image
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
+        Log.i("Test", "view.getLayoutParams()");
         params.width = width;
         params.height = height;
         view.setLayoutParams(params);
@@ -157,6 +160,7 @@ public class SendMoment extends ActionBarActivity {
         float density = getApplicationContext().getResources().getDisplayMetrics().density;
         return Math.round((float)dp * density);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -178,6 +182,13 @@ public class SendMoment extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void cancel(View view) {
+        // Do something in response to button
+        Intent intent = new Intent(this, PersonalPage.class);
+        intent.putExtra("username", username);
+        startActivity(intent);
     }
 
     class SendMomentAttemp extends AsyncTask<String, String, String> {

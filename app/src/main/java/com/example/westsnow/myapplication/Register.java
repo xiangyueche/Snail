@@ -116,7 +116,7 @@ public class Register extends ActionBarActivity {
                 success = json.getInt(TAG_SUCCESS);
                 if (success == 1) {
                     Log.d("Successfully registed!", json.toString());
-                    Intent ii = new Intent(Register.this, HomePage.class);
+                    Intent ii = new Intent(Register.this, PersonalPage.class);
 //                    finish();
                     // this finish() method is used to tell android os that we are done with current //activity now! Moving to other activity
                     ii.putExtra("username", username);

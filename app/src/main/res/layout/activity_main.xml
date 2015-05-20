@@ -1,48 +1,65 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:background="@color/white" >
 
-    <EditText
-        android:id="@+id/username"
-        android:hint="Username"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
-        android:layout_gravity="center"
-        android:ems="10" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:weightSum="1">
 
-        <requestFocus />
-    </EditText>
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_marginTop="120dp"
+            android:layout_gravity="center"
+            android:src="@drawable/snaillogotemp" />
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="250dp"
-        android:hint="Password"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword" />
+        <EditText
+            android:id="@+id/username"
+            android:hint="Username"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center"
+            android:ems="10" >
 
+            <requestFocus />
+        </EditText>
 
-    <Button
-        android:id="@+id/signInButton"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="sign in"
-        android:onClick="login" />
-
-    <Button
-        android:id="@+id/signUpButton"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="sign up"
-        android:onClick="register" />
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="300dp"
+            android:hint="Password"
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword" />
 
 
-</LinearLayout>
+        <Button
+            android:id="@+id/signInButton"
+            android:layout_marginTop="45dp"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:text="sign in"
+            android:onClick="login"
+            android:layout_gravity="center_horizontal" />
+
+        <Button
+            android:id="@+id/signUpButton"
+            android:layout_marginTop="20dp"
+            android:layout_width="150dp"
+            android:layout_height="60dp"
+            android:text="sign up"
+            android:onClick="register"
+            android:layout_gravity="center_horizontal" />
+
+    </LinearLayout>
+
+
+</ScrollView>
