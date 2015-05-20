@@ -1,7 +1,10 @@
 package com.example.westsnow.myapplication;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ComponentName;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -18,9 +21,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.LinearLayout;
 import android.net.Uri;
@@ -71,40 +78,114 @@ public class SendMoment extends ActionBarActivity {
 
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
+
         icon = (ImageView) findViewById(R.id.open_image_from_disk_icon);
         icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Creating the instance of PopupMenu
-                PopupMenu popup = new PopupMenu(SendMoment.this, icon);
-                //Inflating the Popup using xml file
-                popup.getMenuInflater()
-                        .inflate(R.menu.menu_send_moment, popup.getMenu());
+                //popup_menu();
 
-                //registering popup with OnMenuItemClickListener
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.from_Local:
-                                loadImagefromGallery();
-                                return true;
-                            case R.id.from_Camera:
-                                dispatchTakePictureIntent();
-                                return true;
-                            default:
-                                loadImagefromGallery();
-                                return true;
-                        }
+                // custom dialog
+                final Dialog dialog = new Dialog(SendMoment.this);
+                dialog.setContentView(R.layout.custom);
+                dialog.setTitle("Where to import the photo?");
+
+                // set the custom dialog components - text, image and button
+                TextView text = (TextView) dialog.findViewById(R.id.text);
+                text.setText("Android custom dialog example!");
+
+                Button dialogButtonLeft = (Button) dialog.findViewById(R.id.dialogButtonLeft);
+                // if button is clicked, close the custom dialog
+                dialogButtonLeft.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        loadImagefromGallery();
+                        dialog.dismiss();
+                    }
+                });
+                Button dialogButtonRight = (Button) dialog.findViewById(R.id.dialogButtonRight);
+                // if button is clicked, close the custom dialog
+                dialogButtonRight.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dispatchTakePictureIntent();
+                        dialog.dismiss();
                     }
                 });
 
-                popup.show(); //showing popup menu
+                dialog.show();
+                Window window = dialog.getWindow();
+                window.setLayout(800, 400);
+                //popup_alert();
             }
 
         });
 
 
+
     }//closing the setOnClickListener method
+
+    public void popup_menu(){
+            //Creating the instance of PopupMenu
+            PopupMenu popup = new PopupMenu(SendMoment.this, icon);
+            //Inflating the Popup using xml file
+            popup.getMenuInflater()
+                    .inflate(R.menu.menu_send_moment, popup.getMenu());
+
+            //registering popup with OnMenuItemClickListener
+            popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                public boolean onMenuItemClick(MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.from_Local:
+                            loadImagefromGallery();
+                            return true;
+                        case R.id.from_Camera:
+                            dispatchTakePictureIntent();
+                            return true;
+                        default:
+                            loadImagefromGallery();
+                            return true;
+                    }
+                }
+            });
+            popup.show(); //showing popup menu
+    }
+
+
+    public void popup_alert(){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+        // set title
+        alertDialogBuilder.setTitle("Your Title");
+
+        // set dialog message
+        alertDialogBuilder
+                .setMessage("Where to import the photo?")
+                .setCancelable(true)
+                .setPositiveButton("Open Gallery",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        // if this button is clicked, close
+                        // current activity
+                        dialog.cancel();
+                        loadImagefromGallery();
+                    }
+                })
+                .setNegativeButton("Activate camera",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        // if this button is clicked, just close
+                        // the dialog box and do nothing
+                        dialog.cancel();
+                        dispatchTakePictureIntent();
+                    }
+                });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
+
+    }
 
 
     public void loadImagefromGallery() {
