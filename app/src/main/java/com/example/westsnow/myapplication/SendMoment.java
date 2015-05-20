@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.widget.LinearLayout;
 import android.net.Uri;
@@ -92,7 +93,7 @@ public class SendMoment extends ActionBarActivity {
                 ImageView imgView = (ImageView) findViewById(R.id.open_image_from_disk_icon);
                 // Set the Image in ImageView after decoding the String
                 imgView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
-                //scaleImage();
+                scaleImage();
             } else {
                 Toast.makeText(this, "You haven't picked Image", Toast.LENGTH_LONG).show();
             }
@@ -114,7 +115,7 @@ public class SendMoment extends ActionBarActivity {
         // Get current dimensions AND the desired bounding box
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
-        int bounding = dpToPx(250);
+        int bounding = dpToPx(500);
         Log.i("Test", "original width = " + Integer.toString(width));
         Log.i("Test", "original height = " + Integer.toString(height));
         Log.i("Test", "bounding = " + Integer.toString(bounding));
@@ -146,12 +147,13 @@ public class SendMoment extends ActionBarActivity {
         Log.i("Test", "Apply the scaled bitmap");
 
         // Now change ImageView's dimensions to match the scaled image
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) view.getLayoutParams();
         Log.i("Test", "view.getLayoutParams()");
         params.width = width;
         params.height = height;
         view.setLayoutParams(params);
-
+        //LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(30, 30);
+        //view.setLayoutParams(layoutParams);
         Log.i("Test", "done");
     }
 
