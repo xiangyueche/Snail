@@ -1,12 +1,17 @@
 package com.example.westsnow.myapplication;
 
 import android.app.ProgressDialog;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Environment;
+import android.os.Parcelable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.widget.LinearLayout;
@@ -24,21 +30,25 @@ import android.database.Cursor;
 import android.widget.ImageView;
 import android.graphics.BitmapFactory;
 
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.io.File;
 
 
 public class SendMoment extends ActionBarActivity {
 
     private String username;
     private EditText context;
-    private static int RESULT_LOAD_IMG = 1;
+    static final int RESULT_LOAD_IMG = 1;
+    static final int REQUEST_IMAGE_CAPTURE = 2;
+
     String imgDecodableString;
 
     private ProgressDialog pDialog;
@@ -47,7 +57,7 @@ public class SendMoment extends ActionBarActivity {
     //    private static final String URL =  "http://ec2-52-24-240-104.us-west-2.compute.amazonaws.com/register.php";
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
-
+    private ImageView icon;
     public void send(View view){
         new SendMomentAttemp().execute();
     }
@@ -61,9 +71,43 @@ public class SendMoment extends ActionBarActivity {
 
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
-    }
+        icon = (ImageView) findViewById(R.id.open_image_from_disk_icon);
+        icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Creating the instance of PopupMenu
+                PopupMenu popup = new PopupMenu(SendMoment.this, icon);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater()
+                        .inflate(R.menu.menu_send_moment, popup.getMenu());
 
-    public void loadImagefromGallery(View view) {
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.from_Local:
+                                loadImagefromGallery();
+                                return true;
+                            case R.id.from_Camera:
+                                dispatchTakePictureIntent();
+                                return true;
+                            default:
+                                loadImagefromGallery();
+                                return true;
+                        }
+                    }
+                });
+
+                popup.show(); //showing popup menu
+            }
+
+        });
+
+
+    }//closing the setOnClickListener method
+
+
+    public void loadImagefromGallery() {
         // Create intent to Open Image applications like Gallery, Google Photos
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -71,6 +115,12 @@ public class SendMoment extends ActionBarActivity {
         startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
     }
 
+    public void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -94,14 +144,22 @@ public class SendMoment extends ActionBarActivity {
                 // Set the Image in ImageView after decoding the String
                 imgView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
                 scaleImage();
-            } else {
-                Toast.makeText(this, "You haven't picked Image", Toast.LENGTH_LONG).show();
+            }
+            else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+                Bundle extras = data.getExtras();
+                Bitmap imageBitmap = (Bitmap) extras.get("data");
+                ImageView imgView = (ImageView) findViewById(R.id.open_image_from_disk_icon);
+                imgView.setImageBitmap(imageBitmap);
+                scaleImage();
             }
         } catch (Exception e) {
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
         }
 
     }
+
+
+
     private void scaleImage()
     {
         // Get the ImageView and its bitmap
@@ -152,8 +210,6 @@ public class SendMoment extends ActionBarActivity {
         params.width = width;
         params.height = height;
         view.setLayoutParams(params);
-        //LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(30, 30);
-        //view.setLayoutParams(layoutParams);
         Log.i("Test", "done");
     }
 

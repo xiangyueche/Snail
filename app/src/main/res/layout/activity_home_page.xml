@@ -5,6 +5,7 @@
     android:layout_height="fill_parent"
     android:layout_width="fill_parent">
     <!-- Header -->
+    <!--
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/header"
         android:layout_width="fill_parent"
@@ -44,7 +45,7 @@
             android:textStyle="bold"
             android:textSize="20sp" />
     </RelativeLayout>
-
+    -->
     <!-- List Divider -->
     <View android:layout_width="fill_parent"
         android:layout_height="1dip"

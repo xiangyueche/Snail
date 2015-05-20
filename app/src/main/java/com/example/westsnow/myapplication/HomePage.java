@@ -57,7 +57,7 @@ public class HomePage extends ListActivity {
     }
 
     String[] itemname ={
-            "aaaa",
+            "My Profile",
             "BBBBB",
             "cccc",
             "ddd",
@@ -68,7 +68,7 @@ public class HomePage extends ListActivity {
     };
 
     Integer[] imgid={
-            R.drawable.contact_icon,
+            R.drawable.contact_icon_me,
             R.drawable.contact_icon,
             R.drawable.contact_icon,
             R.drawable.contact_icon,
