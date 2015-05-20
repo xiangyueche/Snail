@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.model.*;
 import com.google.android.gms.maps.GoogleMap;
 
@@ -142,7 +143,6 @@ public class MapUtil {
         try {
 
             jRoutes = jObject.getJSONArray("routes");
-
             /** Traversing all routes */
             for(int i=0;i<jRoutes.length();i++){
                 jLegs =((JSONObject)jRoutes.get(i)).getJSONArray("legs");
@@ -237,7 +237,7 @@ public class MapUtil {
         return points;
     }
 
-    public void drawRoutes(List<List<LatLng>> routes, GoogleMap map){
+    public Polyline drawRoutes(List<List<LatLng>> routes, GoogleMap map){
 
         PolylineOptions polyLineOptions = new PolylineOptions();
         for(List<LatLng> route : routes){
@@ -245,8 +245,23 @@ public class MapUtil {
             polyLineOptions.width(10);
             polyLineOptions.color(Color.RED);
         }
-        map.addPolyline(polyLineOptions);
+        LatLng startPos = null;
+        if(routes.size() > 0){
+            if(routes.get(0).size() > 0) {
+                startPos = routes.get(0).get(0);
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(startPos, 13));
+            }
+        }
+
+
+
+        return map.addPolyline(polyLineOptions);
 
     }
 
+    public String formatInputLoca(String inputLoca){
+        inputLoca =inputLoca.replace(" ","");
+
+        return inputLoca;
+    }
 }
