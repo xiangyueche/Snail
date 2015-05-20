@@ -105,6 +105,7 @@ public class HomePage extends ListActivity {
 //        lv.setAdapter(adapter);
 
         lv = getListView();
+        lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         new LoadALlFriends().execute();
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
