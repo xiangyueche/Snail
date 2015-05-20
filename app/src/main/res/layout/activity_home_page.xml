@@ -2,8 +2,35 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_height="fill_parent"
+    android:layout_height="wrap_content"
     android:layout_width="fill_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+    <EditText
+        android:id="@+id/email"
+        android:hint="enter new friend email"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp" />
+    <Button
+        android:id="@+id/signInButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        android:onClick="addFriend"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp" />
+    </LinearLayout>
+
     <!-- Header -->
     <!--
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -57,22 +84,6 @@
         android:layout_width="fill_parent">
     </ListView>
 
-    <EditText
-        android:id="@+id/email"
-        android:hint="enter new friend email"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
-        android:layout_gravity="center"
-        android:ems="10" />
-
-    <Button
-        android:id="@+id/signInButton"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="request new friend"
-        android:onClick="addFriend" />
 
 </LinearLayout>
+
