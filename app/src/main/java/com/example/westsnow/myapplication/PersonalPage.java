@@ -22,6 +22,7 @@ import java.util.*;
 public class PersonalPage extends CurLocaTracker {
 
     private String username;
+    private String momentSent;
     private final android.os.Handler handle = new Handler();
     private Polyline polyline = null;
 
@@ -110,6 +111,7 @@ public class PersonalPage extends CurLocaTracker {
 
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
+        momentSent = intent.getStringExtra("momentSent");
 
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);

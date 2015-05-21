@@ -93,7 +93,9 @@ public class CurLocaTracker extends ActionBarActivity implements OnMapReadyCallb
                 m_LastMarker = m_map.addMarker(new MarkerOptions()
                         .title("Current Location")
                         .snippet("The most populous city in")
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
                         .position(curLocation));
+                m_LastMarker.showInfoWindow();
             }
         }catch(SnailException e){
             System.out.println(SnailException.EX_DESP_LocationNotExist);

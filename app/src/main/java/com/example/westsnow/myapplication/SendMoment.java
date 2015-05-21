@@ -363,11 +363,12 @@ public class SendMoment extends ActionBarActivity {
                 // success tag for json
                 success = json.getInt(TAG_SUCCESS);
                 if (success == 1) {
-                    Log.d("Successfully registed!", json.toString());
+                    Log.d("Successfully registered", json.toString());
                     Intent ii = new Intent(SendMoment.this, PersonalPage.class);
 //                    finish();
                     // this finish() method is used to tell android os that we are done with current //activity now! Moving to other activity
                     ii.putExtra("username", username);
+                    ii.putExtra("momentSent", "true");
                     startActivity(ii);
                     return json.getString(TAG_MESSAGE) + "~";
                 } else {
