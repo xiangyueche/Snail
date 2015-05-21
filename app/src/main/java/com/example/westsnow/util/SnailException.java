@@ -3,8 +3,9 @@ package com.example.westsnow.util;
 public class SnailException extends Exception {
 
 	public static final String EX_DESP_MapNotExist = "Map does not exist.";
-	public static final String EX_DESP_LocationNotExistDataFile = "Map does not exist.";
+	public static final String EX_DESP_LocationNotExist = "Can not access current location.";
 	public static final String EX_DESP_JsonNull = "Json is null.";
+	public static final String EX_DESP_PathNotExist = "No Path Found.";
 
 	private String m_strExDesp;
 	private String m_strParam1, m_strParam2;

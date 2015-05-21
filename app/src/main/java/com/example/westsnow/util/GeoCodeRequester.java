@@ -1,23 +1,8 @@
 package com.example.westsnow.util;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.StatusLine;
-import org.apache.http.client.methods.*;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
-import org.json.JSONException;
+
 import org.json.JSONObject;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import org.apache.http.util.*;
 
 import android.content.Context;
 import android.location.Address;
@@ -29,8 +14,8 @@ import java.util.*;
  */
 public class GeoCodeRequester {
 
-    public JSONObject jsonObj;
-    public String returnedJson;
+    public JSONObject m_jsonObj;
+    public String m_returnedJson;
 
     private static GeoCodeRequester m_instance = null;
 

@@ -88,7 +88,7 @@ public class MapUtil {
         return response;
     }
 
-    private JSONObject getValues(Map<String, Object> params, String url) throws JSONException {
+    private JSONObject getValues(Map<String, Object> params, String url) throws JSONException, SnailException {
         String token = "";
         JSONObject obToken = null;
         HttpResponse response = post(params, url);
@@ -108,13 +108,22 @@ public class MapUtil {
         return obToken;
     }
 
-    public List<List<LatLng>> getRoutes(String origin, String destination) throws JSONException {
+    public List<List<LatLng>> getRoutes(String origin, String destination) throws SnailException, JSONException {
         //String url ="https://maps.googleapis.com/maps/api/directions/json?origin=Queens&destination=Brooklyn&key="+API_KEY;
+        List<List<LatLng>> routes = null;
+        try {
+            String url = "https://maps.googleapis.com/maps/api/directions/json?origin=" + origin + "&destination=" + destination + "&mode=driving&key=" + API_KEY;
 
-        String url ="https://maps.googleapis.com/maps/api/directions/json?origin="+origin+"&destination="+destination+"&mode=driving&key="+API_KEY;
-
-        JSONObject obRoute =  getValues(null, url);
-        return parseRoute(obRoute);
+            JSONObject obRoute = getValues(null, url);
+            routes = parseRoute(obRoute);
+        }
+        catch(JSONException e){
+            e.printStackTrace();
+        }
+        catch(SnailException e){
+            throw e;
+        }
+        return routes;
     }
 
     /*
@@ -132,17 +141,18 @@ public class MapUtil {
     }
     */
 
-    private List<List<LatLng>> parseRoute(JSONObject jObject){
+    private List<List<LatLng>> parseRoute(JSONObject jObject) throws SnailException{
 
-        //List<List<HashMap<String, String>>> routes = new ArrayList<List<HashMap<String,String>>>() ;
         List<List<LatLng>> routes = new ArrayList<List<LatLng>>();
         JSONArray jRoutes = null;
         JSONArray jLegs = null;
         JSONArray jSteps = null;
-
         try {
 
             jRoutes = jObject.getJSONArray("routes");
+            if((jRoutes == null) || (jRoutes.length() == 0))
+                throw new SnailException(SnailException.EX_DESP_PathNotExist);
+
             /** Traversing all routes */
             for(int i=0;i<jRoutes.length();i++){
                 jLegs =((JSONObject)jRoutes.get(i)).getJSONArray("legs");
@@ -178,16 +188,14 @@ public class MapUtil {
 
                         routes.add(localist);
                     }
-
                 }
             }
 
-        } catch (JSONException e) {
+        }catch (JSONException e){
             e.printStackTrace();
-        }catch (Exception e){
+        }catch(SnailException e){
+            throw e;
         }
-
-
         return routes;
     }
 
@@ -252,9 +260,6 @@ public class MapUtil {
                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(startPos, 13));
             }
         }
-
-
-
         return map.addPolyline(polyLineOptions);
 
     }

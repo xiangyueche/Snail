@@ -3,27 +3,21 @@ package com.example.westsnow.myapplication;
 import com.example.westsnow.util.*;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.os.*;
 import android.content.Context;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.westsnow.util.GeoCodeRequester;
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.*;
-import com.google.android.gms.maps.model.PolylineOptions;
 
 import org.json.JSONException;
 
 import java.util.*;
-import java.util.logging.*;
-
 
 public class PersonalPage extends CurLocaTracker {
 
@@ -85,9 +79,6 @@ public class PersonalPage extends CurLocaTracker {
             @Override
             public void run() {
                 try {
-                    //String startPosName = "Queens";
-                    //String endPosName = "Brooklyn";
-
 
                     final List<List<LatLng>> routes = util.getRoutes(startPosName, endPosName);
                     handle.post(new Runnable() {
@@ -100,6 +91,13 @@ public class PersonalPage extends CurLocaTracker {
                     });
                 }catch(JSONException e){
                     e.printStackTrace();
+                }catch(SnailException e){
+                    if(e.getExDesp().equals(SnailException.EX_DESP_PathNotExist)){
+                        System.out.println("Path not exist");
+                        // Todo : add dialogue to show No Path Found
+
+                    }
+
                 }
             }
         }).start();

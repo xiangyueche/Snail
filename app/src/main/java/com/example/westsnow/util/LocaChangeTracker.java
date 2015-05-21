@@ -32,39 +32,48 @@ public class LocaChangeTracker extends CurLocaTracker{
         m_curLocation = locaTracker.m_LastLocation;
         m_LastMarker = locaTracker.m_LastMarker;
 
-        if((m_map == null)){
-            throw new  NullPointerException();
+        try{
+            if ((m_map == null)) {
+                throw new SnailException("Map does not exist");
+            }
+        }catch(SnailException e){
+            System.out.println(SnailException.EX_DESP_MapNotExist);
         }
     }
 
     private LocationListener locationListener = new LocationListener() {
 
         public void onLocationChanged(Location location) {
-            if(location == null){
-                throw new NullPointerException(); //Todo: change to SnailPointerException()
+            try {
+                if (location == null) {
+                    throw new SnailException(SnailException.EX_DESP_LocationNotExist);
+                }
+                m_curLocation = location;
+                System.out.println("location changed!");
+
+                LatLng curLocation = new LatLng(location.getLatitude(), location.getLongitude());
+
+                //display a point to move
+                if ((m_LastMarker == null)) {
+                    throw new NullPointerException();
+                }
+                m_LastMarker.setVisible(false);
+
+
+                m_LastMarker = m_map.addMarker(new MarkerOptions()
+                        .title("Current Location")
+                        .snippet("The most populous city in")
+                        .position(curLocation));
+
+                //Todo: save it to DB
+
+
+                Log.i(TAG, "changed longtitude:" + location.getLongitude());
+                Log.i(TAG, "changed latitude:" + location.getLatitude());
+
+            }catch(SnailException e){
+                System.out.println(SnailException.EX_DESP_LocationNotExist);
             }
-            m_curLocation = location;
-            System.out.println("location changed!");
-
-            LatLng curLocation = new LatLng(location.getLatitude(), location.getLongitude());
-
-            //display a point to move
-            if((m_LastMarker == null)){
-                throw new NullPointerException();
-            }
-            m_LastMarker.setVisible(false);
-
-
-            m_LastMarker = m_map.addMarker(new MarkerOptions()
-                    .title("Current Location")
-                    .snippet("The most populous city in")
-                    .position(curLocation));
-
-            //Todo: save it to DB
-
-
-            Log.i(TAG, "changed longtitude:" + location.getLongitude());
-            Log.i(TAG, "changed latitude:"+location.getLatitude());
         }
 
         public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -142,6 +151,7 @@ public class LocaChangeTracker extends CurLocaTracker{
             }
         };
     };
+
     public void trackChangedLocation(Context context){
         System.out.println("go into track!");
         lm = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
