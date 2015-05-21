@@ -25,6 +25,7 @@ public class Register extends ActionBarActivity {
 
     private EditText Username;
     private EditText Password;
+    private EditText PasswordConfirm;
     private ProgressDialog pDialog;
     JSONParser jsonParser = new JSONParser();
     private static final String URL = Constant.serverDNS + "/register.php";
@@ -57,7 +58,7 @@ public class Register extends ActionBarActivity {
 
         Username=(EditText)findViewById(R.id.username);
         Password=(EditText)findViewById(R.id.password);
-
+        PasswordConfirm = (EditText)findViewById(R.id.passwordconfirm);
 
     }
 
@@ -104,6 +105,11 @@ public class Register extends ActionBarActivity {
             int success;
             String username = Username.getText().toString();
             String password = Password.getText().toString();
+            String passwordConfirm = PasswordConfirm.getText().toString();
+
+            if (!password.equals(passwordConfirm)) {
+                return "pwConfirmError";
+            }
             try {
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
                 params.add(new BasicNameValuePair("email", username));
@@ -144,8 +150,10 @@ public class Register extends ActionBarActivity {
             if (message != null) {
                 if (message.equals("null")) {
                     Toast.makeText(Register.this, "Cannot connect to network!", Toast.LENGTH_LONG).show();
+                } else if (message.equals("pwConfirmError")) {
+                    Toast.makeText(Register.this, "Password Not Match! Please re-enter!", Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(Register.this, message, Toast.LENGTH_LONG).show();
+                        Toast.makeText(Register.this, message, Toast.LENGTH_LONG).show();
                 }
             }
         }
