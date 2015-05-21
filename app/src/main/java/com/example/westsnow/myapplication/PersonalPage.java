@@ -1,25 +1,35 @@
 package com.example.westsnow.myapplication;
 
-import com.example.westsnow.util.CurLocaTracker;
+import com.example.westsnow.util.*;
 
-import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.os.*;
+import android.content.Context;
 import android.widget.EditText;
-import android.widget.PopupMenu;
 import android.widget.Toast;
 
+import com.example.westsnow.util.GeoCodeRequester;
 import com.google.android.gms.maps.*;
+import com.google.android.gms.maps.model.*;
+import com.google.android.gms.maps.model.PolylineOptions;
+
+import org.json.JSONException;
+
+import java.util.*;
+import java.util.logging.*;
 
 
 public class PersonalPage extends CurLocaTracker {
 
     private String username;
-
+    private final android.os.Handler handle = new Handler();
+    private Polyline polyline = null;
 
     public void homepage(View view){
         Intent in = new Intent(getApplicationContext(),
@@ -49,7 +59,6 @@ public class PersonalPage extends CurLocaTracker {
 
     }
 
-
     public void GetRouteValue(View view) {
 
         final EditText startText = (EditText)findViewById(R.id.start);
@@ -67,7 +76,33 @@ public class PersonalPage extends CurLocaTracker {
         System.out.println("start is:" + startValue);
         System.out.println("end is:" + endValue);
 
+        final MapUtil util = MapUtil.getInstance();
+        final String startPosName = util.formatInputLoca(startValue);
+        final String endPosName = util.formatInputLoca(endValue);
 
+        //When user press button, find route from start to end
+        new Thread(new Runnable(){
+            @Override
+            public void run() {
+                try {
+                    //String startPosName = "Queens";
+                    //String endPosName = "Brooklyn";
+
+
+                    final List<List<LatLng>> routes = util.getRoutes(startPosName, endPosName);
+                    handle.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(polyline != null)
+                                polyline.remove();
+                            polyline  = util.drawRoutes(routes, m_map);
+                        }
+                    });
+                }catch(JSONException e){
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
     @Override
@@ -82,9 +117,18 @@ public class PersonalPage extends CurLocaTracker {
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         m_map = mapFragment.getMap();
-        buildGoogleApiClient();
-    }
 
+        //1) Show Map  2) Get Cur Loca 3) Update Location in time
+        buildGoogleApiClient();
+
+        //3) GeoCoding
+        // Todo: after clicking button, get requested locationName, and request latitude, longtitude
+        /*
+        String locationName = "600 Independence Ave SW, Washington, DC 20560";
+        GeoCodeRequester codeRequester = GeoCodeRequester.getInstance();
+        codeRequester.getGeoLocation(this,locationName);
+        */
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -112,5 +156,4 @@ public class PersonalPage extends CurLocaTracker {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

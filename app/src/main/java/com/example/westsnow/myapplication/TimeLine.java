@@ -4,14 +4,12 @@ import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -20,7 +18,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class TimeLine extends ListActivity {
@@ -35,6 +35,9 @@ public class TimeLine extends ListActivity {
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_USER = "users";
 
+    private TimelineAdapter timelineAdapter;
+    private List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,7 @@ public class TimeLine extends ListActivity {
         username = intent.getStringExtra("username");
 
         lv = getListView();
+        lv.setDividerHeight(0);
 
         new LoadAllMoments().execute();
     }
@@ -116,7 +120,11 @@ public class TimeLine extends ListActivity {
                         // Storing each json item in variable
                         String context = c.getString("context");
                         String time = c.getString("time");
-                        momentList.add(time+ " | " + context);
+                        //momentList.add(time+ " | " + context);
+                        Map<String, Object> map = new HashMap<String, Object>();
+                        map.put("title", context);
+                        map.put("time", time);
+                        list.add(map);
                     }
                 }
             } catch (JSONException e) {
@@ -135,20 +143,8 @@ public class TimeLine extends ListActivity {
             // updating UI from Background Thread
             runOnUiThread(new Runnable() {
                 public void run() {
-                    ArrayAdapter<String> codeLearnArrayAdapter =
-                            new ArrayAdapter<String>(TimeLine.this, android.R.layout.simple_list_item_1, momentList);
-
-                    lv.setAdapter(codeLearnArrayAdapter);
-//                    /**
-//                     * Updating parsed JSON data into ListView
-//                     * */
-//                    ListAdapter adapter = new SimpleAdapter(
-//                            AllProductsActivity.this, productsList,
-//                            R.layout.list_item, new String[] { TAG_PID,
-//                            TAG_NAME},
-//                            new int[] { R.id.pid, R.id.name });
-//                    // updating listview
-//                    setListAdapter(adapter);
+                    timelineAdapter = new TimelineAdapter(TimeLine.this, list);
+                    lv.setAdapter(timelineAdapter);
                 }
             });
         }

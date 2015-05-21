@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/7.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b48d5c51a9a9e329005106b4667f54948de4d4d8">
+        <dex dex="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/pre-dexed/debug/classes-93e975b13e900a900b8c769c86b066193d67a326.jar" />
+    </item>
+    <item
+        jar="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/7.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e35fae1b377c23aa5fd2d309a190c2d0f73d54ec">
+        <dex dex="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/pre-dexed/debug/classes-0fb2cca3ebb43be0d32c9659bce24d02dd9d1ced.jar" />
+    </item>
+    <item
+        jar="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/7.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="59652857a825fff0de62166fca1bc9553cc01abb">
+        <dex dex="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/pre-dexed/debug/classes-863dc56dd27a81a5a42560c7f2874a8b215feeb4.jar" />
+    </item>
+    <item
+        jar="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/7.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="7215ac1f2fca947b9415a6ee2a1bf991364aab24">
+        <dex dex="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/pre-dexed/debug/classes-b4b85204d450a984753bed198e0db596e244a139.jar" />
+    </item>
+    <item
+        jar="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/7.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e5b9f5b0aa8dee788beb63d23832cb29ce771343">
+        <dex dex="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/pre-dexed/debug/classes-6ba2d1fe9c60c507f72b8d2fddd26064d71cbaaa.jar" />
+    </item>
+    <item
+        jar="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a3ff3c506644c820eb2bdf06e8339f72be578551">
+        <dex dex="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/pre-dexed/debug/classes-3467712dcfae30d3595618db292d8d0c2e77b8de.jar" />
+    </item>
+    <item
+        jar="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/7.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="9c9dea9e85aceb09d95df5e6f7bc8a43fc286068">
+        <dex dex="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/pre-dexed/debug/classes-0ccb52b7b683a87d0ecea11f0540356ee5c1e23f.jar" />
+    </item>
+    <item
+        jar="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/7.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="6046e5cdaf799120b7c56a5a061d80e8854c4d34">
+        <dex dex="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/pre-dexed/debug/classes-b6756396bb95da1bdca8af4d32ab3f98e3ef7872.jar" />
+    </item>
+    <item
+        jar="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appstate/7.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="0180d031a7b54dabb93b4af3869468b55dc938bd">
+        <dex dex="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/pre-dexed/debug/classes-1cb8e3ae96f09be25d1e9d9e64d9b05211bae2d4.jar" />
+    </item>
+    <item
+        jar="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c95ba8152923e4872e86a82cfcba9a51c0214328">
+        <dex dex="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/pre-dexed/debug/classes-dd277d1f9362f7e1e33354d894115aa549086d53.jar" />
+    </item>
+    <item
+        jar="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/7.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3988694bf9d8186ff97ad5cdfa4ed88b5010fe08">
+        <dex dex="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/pre-dexed/debug/classes-a8900a67c30e33cf5dfdf91323f5d29a57f7477d.jar" />
+    </item>
+    <item
+        jar="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.1.1/jars/libs/internal_impl-22.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="9e070ad32b2700b0343e8e0cccc437733d91ba3a">
+        <dex dex="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/pre-dexed/debug/internal_impl-22.1.1-2dd36e5fbabcf437fe2911e1b9882159f43d22fe.jar" />
+    </item>
+    <item
+        jar="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/7.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f2f7ec211ce4d244ee97a57523eeb4526dc3cf8a">
+        <dex dex="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/pre-dexed/debug/classes-2400f44df1880c0b9f848d20f9930798ef7af388.jar" />
+    </item>
+    <item
+        jar="/Users/xiaodiyue/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.1.1/support-annotations-22.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="01d051a6bfb1218b1db2d3a5af0480ac2c25c42a">
+        <dex dex="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/pre-dexed/debug/support-annotations-22.1.1-408594f90c89e9f16d595449a42051eddd996374.jar" />
+    </item>
+    <item
+        jar="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/7.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="0708ef60917bf94913fe9ef972a655b99462dca7">
+        <dex dex="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/pre-dexed/debug/classes-201eb8b0dfe1f3b33b71e52a9523f8e9f97c7b6f.jar" />
+    </item>
+    <item
+        jar="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/7.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="565a01f90f1529f73362707c4c185d0623a68782">
+        <dex dex="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/pre-dexed/debug/classes-ea9b5c8f96d307f15c15046d0882aa5a7b9d967c.jar" />
+    </item>
+    <item
+        jar="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/7.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4f4fe3c23776540625f3c2844152a7510fddf9f1">
+        <dex dex="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/pre-dexed/debug/classes-e9a2df99d12679bb68fa6d5dcbeb7e8546de4511.jar" />
+    </item>
+    <item
+        jar="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/7.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="3b4ff5c39dace8f3b4ab4cab8191785547a0815f">
+        <dex dex="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/pre-dexed/debug/classes-9faa6d62371ce5867aabceae7b8ec999de61f2b5.jar" />
+    </item>
+    <item
+        jar="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/7.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e5bf453b070c1e39297986144960e45afa0fdfad">
+        <dex dex="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/pre-dexed/debug/classes-820dec6e0d57fab5fbd896e3a1bfeddf74d6fd9d.jar" />
+    </item>
+    <item
+        jar="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/7.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="b2c07cdb814fe988ad05f7b4d767a841514a5991">
+        <dex dex="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/pre-dexed/debug/classes-8399976012666b9f32f659fe7bb63d34785bea15.jar" />
+    </item>
+    <item
+        jar="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/7.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="a0ce76dfaccbfbd6c551ed2174280aaabe60fe47">
+        <dex dex="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/pre-dexed/debug/classes-3c68143ca673179cc7e7988e00495dffb6f6eef8.jar" />
+    </item>
+    <item
+        jar="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/7.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="5ea948d825957be6c4358c48422bee60eef2d487">
+        <dex dex="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/pre-dexed/debug/classes-b63cb918440634bf16967927926b5f56a7aabc2d.jar" />
+    </item>
+    <item
+        jar="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/7.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="bb36004beb02b69562cbec9aa7d6a3cf16bf5d1b">
+        <dex dex="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/pre-dexed/debug/classes-43f15a2e281fabc9e151f220e0b3efeede8f62e6.jar" />
+    </item>
+    <item
+        jar="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/7.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="fe3e0c6de7cceed888b277487238b6af9a1cc299">
+        <dex dex="/Users/xiaodiyue/Desktop/gitCloud/Snail/app/build/intermediates/pre-dexed/debug/classes-36f7bb643fdc180e7b5fdb0371ac0ac4d25a5f15.jar" />
+    </item>
+
+</items>
