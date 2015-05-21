@@ -2,6 +2,7 @@ package com.example.westsnow.myapplication;
 
 import com.example.westsnow.util.*;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,10 +11,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.content.Context;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.*;
 import com.google.android.gms.maps.model.*;
+import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 
 import org.json.JSONException;
 
@@ -21,10 +24,38 @@ import java.util.*;
 
 public class PersonalPage extends CurLocaTracker {
 
+//    class MyInfoWindowAdapter implements InfoWindowAdapter {
+//
+//        private final View myContentsView;
+//
+//        MyInfoWindowAdapter(){
+//            myContentsView = getLayoutInflater().inflate(R.layout.custom_info_contents, null);
+//        }
+//
+//        @Override
+//        public View getInfoContents(Marker marker) {
+//
+//            TextView tvTitle = ((TextView)myContentsView.findViewById(R.id.title));
+//            tvTitle.setText(marker.getTitle());
+//            TextView tvSnippet = ((TextView)myContentsView.findViewById(R.id.snippet));
+//            tvSnippet.setText(marker.getSnippet());
+//
+//            return myContentsView;
+//        }
+//
+//        @Override
+//        public View getInfoWindow(Marker marker) {
+//            // TODO Auto-generated method stub
+//            return null;
+//        }
+//
+//    }
+
     private String username;
     private String momentSent;
     private final android.os.Handler handle = new Handler();
     private Polyline polyline = null;
+
 
     public void homepage(View view){
         Intent in = new Intent(getApplicationContext(),
@@ -128,7 +159,11 @@ public class PersonalPage extends CurLocaTracker {
         GeoCodeRequester codeRequester = GeoCodeRequester.getInstance();
         codeRequester.getGeoLocation(this,locationName);
         */
+
+
+
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -156,4 +191,6 @@ public class PersonalPage extends CurLocaTracker {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

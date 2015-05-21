@@ -119,11 +119,12 @@ public class SendMoment extends ActionBarActivity {
                 //popup_alert();
             }
 
-        });
+        });//closing the setOnClickListener method
 
 
 
-    }//closing the setOnClickListener method
+    }
+
 
     public void popup_menu(){
             //Creating the instance of PopupMenu
