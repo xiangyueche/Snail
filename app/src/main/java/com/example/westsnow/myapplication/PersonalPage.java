@@ -5,6 +5,7 @@ import com.example.westsnow.util.*;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -95,7 +96,9 @@ public class PersonalPage extends CurLocaTracker {
                     if(e.getExDesp().equals(SnailException.EX_DESP_PathNotExist)){
                         System.out.println("Path not exist");
                         // Todo : add dialogue to show No Path Found
-
+                        Looper.prepare();
+                        Toast.makeText(PersonalPage.this, "No path exists! Please re-search!", Toast.LENGTH_LONG).show();
+                        Looper.loop();
                     }
 
                 }

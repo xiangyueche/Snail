@@ -20,7 +20,9 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import android.os.Looper;
 
+import com.example.westsnow.util.SnailException;
 
 public class MainActivity extends ActionBarActivity {
 
@@ -119,7 +121,7 @@ public class MainActivity extends ActionBarActivity {
         }
 
         @Override
-        protected String doInBackground(String... args) {
+        protected String doInBackground(String... args){
             int success;
             String username = Username.getText().toString();
             String password = Password.getText().toString();
@@ -129,10 +131,17 @@ public class MainActivity extends ActionBarActivity {
                 params.add(new BasicNameValuePair("password", password));
                 Log.d("request!", "starting");
                 JSONObject json = jsonParser.makeHttpRequest(LOGIN_URL, "GET", params);
-                // checking log for json response
-                Log.d("Login attempt", json.toString());
-                // success tag for json
-                success = json.getInt(TAG_SUCCESS);
+                System.out.println("JSON received from login in username" + json);
+                if (json != null) {
+                    // checking log for json response
+                    Log.d("Login attempt", json.toString());
+                    // success tag for json
+                    success = json.getInt(TAG_SUCCESS);
+                } else {
+                    //throw new SnailException(SnailException.EX_DESP_JsonNull);
+                    return "null";
+
+                }
                 if (success == 1) {
                     Log.d("Successfully Login!", json.toString());
                     Intent ii = new Intent(MainActivity.this, PersonalPage.class);
@@ -156,7 +165,11 @@ public class MainActivity extends ActionBarActivity {
         protected void onPostExecute(String message) {
             pDialog.dismiss();
             if (message != null) {
-                Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
+                if (message.equals("null")) {
+                    Toast.makeText(MainActivity.this, "Cannot connect to network!", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
+                }
             }
         }
     }

@@ -110,8 +110,13 @@ public class Register extends ActionBarActivity {
                 params.add(new BasicNameValuePair("password", password));
                 Log.d("request!", "starting");
                 JSONObject json = jsonParser.makeHttpRequest(URL, "GET", params);
-                // checking log for json response
-                Log.d("resigter attempt", json.toString());
+                if (json != null) {
+                    // checking log for json response
+                    Log.d("resigter attempt", json.toString());
+                } else {
+                //throw new SnailException(SnailException.EX_DESP_JsonNull);
+                    return "null";
+                }
                 // success tag for json
                 success = json.getInt(TAG_SUCCESS);
                 if (success == 1) {
@@ -137,7 +142,11 @@ public class Register extends ActionBarActivity {
         protected void onPostExecute(String message) {
             pDialog.dismiss();
             if (message != null) {
-                Toast.makeText(Register.this, message, Toast.LENGTH_LONG).show();
+                if (message.equals("null")) {
+                    Toast.makeText(Register.this, "Cannot connect to network!", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(Register.this, message, Toast.LENGTH_LONG).show();
+                }
             }
         }
     }
