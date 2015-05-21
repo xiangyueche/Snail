@@ -4,7 +4,11 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.graphics.Color;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.example.westsnow.myapplication.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -19,6 +23,36 @@ import java.util.List;
  * Created by yingtan on 5/19/15.
  */
 public class CurLocaTracker extends ActionBarActivity implements OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener{
+
+    class MyInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
+
+        private final View myContentsView;
+
+        MyInfoWindowAdapter(){
+            myContentsView = getLayoutInflater().inflate(R.layout.custom_info_contents, null);
+        }
+
+        @Override
+        public View getInfoContents(Marker marker) {
+
+            TextView tvTitle = ((TextView)myContentsView.findViewById(R.id.title));
+            tvTitle.setText(marker.getTitle());
+            TextView tvSnippet = ((TextView)myContentsView.findViewById(R.id.snippet));
+            tvSnippet.setText(marker.getSnippet()); //Should be changed to address on EC2
+            ImageView ivImage = ((ImageView)myContentsView.findViewById(R.id.image));
+            ivImage.setImageResource(R.drawable.photoarea); //Should be changed to address on EC2
+            ivImage.getLayoutParams().height = 250;
+
+            return myContentsView;
+        }
+
+        @Override
+        public View getInfoWindow(Marker marker) {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
+    }
 
     private GoogleApiClient m_GoogleApiClient;
     public GoogleMap m_map;
@@ -43,7 +77,7 @@ public class CurLocaTracker extends ActionBarActivity implements OnMapReadyCallb
     public void onConnected(Bundle connectionHint){// request update
 
         //Task 1: get current location
-            getCurLocation();
+        getCurLocation();
 
         //Task 2: update current location
         LocaChangeTracker tracker = new LocaChangeTracker(this);
@@ -93,7 +127,11 @@ public class CurLocaTracker extends ActionBarActivity implements OnMapReadyCallb
                 m_LastMarker = m_map.addMarker(new MarkerOptions()
                         .title("Current Location")
                         .snippet("The most populous city in")
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
                         .position(curLocation));
+                System.out.println("here in getCurLocation()");
+
+                m_map.setInfoWindowAdapter(new MyInfoWindowAdapter());
             }
         }catch(SnailException e){
             System.out.println(SnailException.EX_DESP_LocationNotExist);
