@@ -52,7 +52,6 @@ public class PersonalPage extends CurLocaTracker {
 //
 //    }
 
-    private String username;
     private String momentSent;
     private final android.os.Handler handle = new Handler();
     private Polyline polyline = null;

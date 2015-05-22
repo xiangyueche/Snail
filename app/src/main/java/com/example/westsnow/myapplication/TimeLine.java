@@ -38,7 +38,6 @@ public class TimeLine extends ListActivity {
     private TimelineAdapter timelineAdapter;
     private List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +48,6 @@ public class TimeLine extends ListActivity {
 
         lv = getListView();
         lv.setDividerHeight(0);
-
         new LoadAllMoments().execute();
     }
 
@@ -116,14 +114,15 @@ public class TimeLine extends ListActivity {
                     // looping through All Products
                     for (int i = 0; i < moments.length(); i++) {
                         JSONObject c = moments.getJSONObject(i);
-
                         // Storing each json item in variable
                         String context = c.getString("context");
                         String time = c.getString("time");
+                        String imageLocation = c.getString("imageLocation");
                         //momentList.add(time+ " | " + context);
                         Map<String, Object> map = new HashMap<String, Object>();
                         map.put("title", context);
                         map.put("time", time);
+                        map.put("imageLocation", imageLocation );
                         list.add(map);
                     }
                 }
@@ -148,6 +147,5 @@ public class TimeLine extends ListActivity {
                 }
             });
         }
-
     }
 }

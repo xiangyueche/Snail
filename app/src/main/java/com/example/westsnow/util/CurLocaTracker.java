@@ -1,13 +1,19 @@
 package com.example.westsnow.util;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.westsnow.myapplication.Constant;
+import com.example.westsnow.myapplication.JSONParser;
 import com.example.westsnow.myapplication.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -17,14 +23,32 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.*;
 
+import org.apache.http.NameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.io.InputStream;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by yingtan on 5/19/15.
  */
 public class CurLocaTracker extends ActionBarActivity implements OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks,GoogleApiClient.OnConnectionFailedListener{
+    private GoogleApiClient m_GoogleApiClient;
+    public GoogleMap m_map;
+    public Location m_LastLocation;
+    public Marker m_LastMarker;
+    protected String username;
 
     class MyInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
+        private static final String TAG_USER = "users";
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        JSONParser jParser = new JSONParser();
+        private final String url = Constant.serverDNS + "/getMoments.php";
 
         private final View myContentsView;
 
@@ -34,14 +58,35 @@ public class CurLocaTracker extends ActionBarActivity implements OnMapReadyCallb
 
         @Override
         public View getInfoContents(Marker marker) {
+            // getting JSON string from URL
+            params.add(new BasicNameValuePair("email", username));
+            //System.out.println(url);
+            //JSONObject json = jParser.makeHttpRequest(url, "GET", params);
+            //System.out.println("here");
+            //try {
+//                JSONArray moments = json.getJSONArray(TAG_USER);
+//                System.out.println("here");
+//                JSONObject c = moments.getJSONObject(0);
+//                System.out.println("here");
+//                String context = c.getString("context");
+//                System.out.println("here");
+//                String imageLocation = c.getString("imageLocation");
+//                System.out.println("here");
+//                String imageURL = Constant.serverDNS + "/" + imageLocation;
+//                System.out.println("here");
 
-            TextView tvTitle = ((TextView)myContentsView.findViewById(R.id.title));
-            tvTitle.setText(marker.getTitle());
-            TextView tvSnippet = ((TextView)myContentsView.findViewById(R.id.snippet));
-            tvSnippet.setText(marker.getSnippet()); //Should be changed to address on EC2
-            ImageView ivImage = ((ImageView)myContentsView.findViewById(R.id.image));
-            ivImage.setImageResource(R.drawable.photoarea); //Should be changed to address on EC2
-            ivImage.getLayoutParams().height = 250;
+                TextView tvTitle = ((TextView)myContentsView.findViewById(R.id.title));
+                tvTitle.setText(marker.getTitle());
+                TextView tvSnippet = ((TextView)myContentsView.findViewById(R.id.snippet));
+                tvSnippet.setText(marker.getSnippet()); //Should be changed to address on EC2
+                //tvSnippet.setText(context); //Should be changed to address on EC2
+                ImageView ivImage = ((ImageView)myContentsView.findViewById(R.id.image));
+                //new DownloadImageTask(ivImage).execute("http://java.sogeti.nl/JavaBlog/wp-content/uploads/2009/04/android_icon_256.png");
+                ivImage.setImageResource(R.drawable.photoarea); //Should be changed to address on EC2
+                ivImage.getLayoutParams().height = 250;
+            //} catch (JSONException e) {
+            //    e.printStackTrace();
+            //}
 
             return myContentsView;
         }
@@ -54,10 +99,32 @@ public class CurLocaTracker extends ActionBarActivity implements OnMapReadyCallb
 
     }
 
-    private GoogleApiClient m_GoogleApiClient;
-    public GoogleMap m_map;
-    public Location m_LastLocation;
-    public Marker m_LastMarker;
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImageTask(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
+    }
+
+
 
     protected synchronized void buildGoogleApiClient() { //called inside onCreate, add connectionListen to client, call onstart in build()
         m_GoogleApiClient = new GoogleApiClient.Builder(this) // after building, called onConnected (callback function) immediately

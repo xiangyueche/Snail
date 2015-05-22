@@ -87,7 +87,7 @@ public class SendMoment extends ActionBarActivity {
 
                 // custom dialog
                 final Dialog dialog = new Dialog(SendMoment.this);
-                dialog.setContentView(R.layout.custom);
+                dialog.setContentView(R.layout.gallery_popup);
                 dialog.setTitle("Where to import the photo?");
 
                 // set the custom dialog components - text, image and button

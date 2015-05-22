@@ -271,6 +271,8 @@ public class HomePage extends ListActivity {
                 success = json.getInt(TAG_SUCCESS);
                 if (success == 1) {
                     Log.d("add friend succeed", json.toString());
+                    //Intent it = new Intent(HomePage.this, HomePage.class);
+                    //startActivity(it);
                     return json.getString(TAG_MESSAGE) + "~";
                 } else {
                     Log.d("add friend failed", json.toString());
